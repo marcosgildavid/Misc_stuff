@@ -103,31 +103,19 @@
 </head>
 
 <body style="overflow-x:hidden;overflow-y:hidden;background:#272822">
-<div id="inputs" style="width: 100%;top: 30%;position: absolute;">
+<div id="inputs" style="width: 100%;top: 30%;position: absolute;display:none">
 
-	<div style="font-family: Verdana; height: 100px; width: 400px; text-align: center; border-radius: 25px; padding: 30px; top: 50%;background: rgb(153, 0, 0);margin: auto;">
+	<div  style="font-family: Verdana; height: 100px; width: 400px; text-align: center; border-radius: 25px; padding: 30px; top: 50%;background: rgb(153, 0, 0);margin: auto;">
 
-		<form>
-		
-		<label style="font-weight: bold;color:white"> Input a Video ID or an YouTube URL:</label>
-			<input type="text" name="video" id="video" size="40">
-			<br>
-			<input type="button" onclick="openvideo(video.value);" value="Open Video">
-		</form>
-	</div>
-</div>> 
-	<div style="display: none; font-family:Verdana;;background: #990000;height:100px;width:400px;text-align:center;border-radius: 25px;padding:30px;top: 50%;position:absolute;">
-
-		<form>
-		
-		<label style="font-weight: bold;color:white"> Input a Video ID or an YouTube URL:</label>
+		<form>		
+			<label style="font-weight: bold;color:white"> Input a Video ID or an YouTube URL:</label>
 			<input type="text" name="video" id="video" size="40">
 			<br>
 			<input type="button" onclick="openvideo(video.value);" value="Open Video">
 		</form>
 	</div>
 </div>
-	<iframe style="display: none"id="youplayer" width="480" height="320" src="" frameborder="1" allowfullscreen autoplay="true" style="margin:auto">
+	<iframe style="display:none" id="youplayer" width="480" height="320" src="" frameborder="1" allowfullscreen autoplay="true" style="margin:auto">
 	</frame>
 
 	
