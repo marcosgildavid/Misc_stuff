@@ -45,14 +45,15 @@
 	function newWindow(video) {
 
     	event.preventDefault();
-    	window.open($(location).attr('href')+"?playwindow=true&video="+video, null, "width=510,height=360,scrollbars=no");
+    	window.open($(location).attr('pathname')+"?playwindow=true&video="+video, null, "width=510,height=360,scrollbars=no");
 	}
 
 	function openvideo(video) {
 		//check if its a URL or an ID
 		if (video.search("://")>0)
 		{			
-			video=getParameter(video,"v");			
+			video=getParameter(video,"v");		
+			console.log('VIDEO:'+video);	
 		}
 
 		newWindow(video);
@@ -78,18 +79,29 @@
 
 		var playwindow=GetURLParameter('playwindow');
 		var video = GetURLParameter('video');
-		
-		//are we a popup?
-		if (playwindow=="true")
+		var myURL = GetURLParameter('myURL');
+
+
+		//if the myURL exists then it must have been called with a button
+		if (myURL != "")
 		{
-			changevideo(video);
-			$("#youplayer").fadeIn();
+			video=getParameter( decodeURIComponent(myURL),'v');
+			
+			newWindow(video);
+			window.close();
 		}
-		//no popup -> show controls
-		else
-			$("#inputs").fadeIn();
+		else {
+			//are we a popup?
+			if (playwindow=="true")
+			{
+				changevideo(video);
+				$("#youplayer").fadeIn();
+			}
+			//no popup -> show controls
+			else
+				$("#inputs").fadeIn();
 
-
+		}
 		//make iframe resize when window resizes
         resize();
         window.onresize = function() {
@@ -102,23 +114,24 @@
 	</script>
 </head>
 
-<body style="overflow-x:hidden;overflow-y:hidden;background:#272822">
-<div id="inputs" style="width: 100%;top: 30%;position: absolute;display:none">
+	<body style="overflow-x:hidden;overflow-y:hidden;background:#272822">
+	<div id="inputs" style="width: 100%;top: 30%;position: absolute;display:none">
 
-	<div  style="font-family: Verdana; height: 100px; width: 400px; text-align: center; border-radius: 25px; padding: 30px; top: 50%;background: rgb(153, 0, 0);margin: auto;">
+		<div  style="font-family: Verdana; height: 100px; width: 400px; text-align: center; border-radius: 25px; padding: 30px; top: 50%;background: rgb(153, 0, 0);margin: auto;">
 
-		<form>		
-			<label style="font-weight: bold;color:white"> Input a Video ID or an YouTube URL:</label>
-			<input type="text" name="video" id="video" size="40">
-			<br>
-			<input type="button" onclick="openvideo(video.value);" value="Open Video">
-		</form>
+			<form>		
+				<label style="font-weight: bold;color:white"> Input a Video ID or an YouTube URL:</label>
+				<input style="border-radius: 5px; border-width:1px; background:#CCCCCC;padding:2px;" type="text" name="video" id="video" size="40">
+				<br>
+				<input type="button" onclick="openvideo(video.value);" value="Open Video">
+			</form>
+		</div>
 	</div>
-</div>
-	<iframe style="display:none" id="youplayer" width="480" height="320" src="" frameborder="1" allowfullscreen autoplay="true" style="margin:auto">
-	</frame>
+		<iframe style="display:none" id="youplayer" width="480" height="320" src="" frameborder="1" allowfullscreen autoplay="true" style="margin:auto">
+		</frame>
 
-	
-</body>
+		
+	</body>
 </html>
+
 
